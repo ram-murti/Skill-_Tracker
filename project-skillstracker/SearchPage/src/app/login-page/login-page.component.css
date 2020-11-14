@@ -1,0 +1,41 @@
+#dialog1,
+#dialog2,
+#dialog3,
+{
+    width: 1500px;
+    height: 600px !important;
+}
+
+#dialog4
+{
+    margin-top: 140px;
+}
+#content1,
+#content2,
+#content4 {
+    height: 80%;
+    background-color:rgb(71, 8, 8);
+    margin-top: 140px;
+    border: 1px solid black;
+}
+
+#content3 {
+    height: 115%;
+    background-color: white;
+    margin-top: 30px;
+    border: 1px solid black;
+}
+
+.modal-header {
+    background-color:rgba(0, 0, 0, 0.5);
+    padding: 16px 16px;
+    color: cornflowerblue;
+    border-bottom: 1px solid black;
+}
+
+@media (min-width: 768px) {
+    .modal-xl {
+        width: 60%;
+        max-width: 600px;
+    }
+}

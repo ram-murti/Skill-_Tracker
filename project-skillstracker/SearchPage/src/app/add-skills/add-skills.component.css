@@ -1,0 +1,62 @@
+.frontEnd {
+    background-color:#91a8eb; 
+    border: none;
+    margin: 10px;
+    color: black;
+    border-radius: 25px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  .backEnd {
+    background-color: #f5a9cf; 
+    border: none;
+    margin: 10px;
+    color: black;
+    border-radius: 25px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  .database {
+    background-color:#99ffcc; 
+    border: none;
+    margin: 10px;
+    color: black;
+    border-radius: 25px;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  .sub { 
+    margin: auto;
+    border-radius: 20px;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 14px;
+  }
+
+  .card
+  {
+    margin: 20px;
+  }
+
+  #cardBody
+  {
+    border-radius: 35px;
+  }
+
+  .formbtn
+  {
+    width: 150px;
+  }

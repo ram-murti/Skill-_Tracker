@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body
+		{
+			background-color: #009999;
+			font-family: Tahoma, Geneva, sans-serif;
+
+		}
+		.EmpDet
+		{
+    		background-color: #ffffff;
+    		padding: 40px;
+    		width: 400px;
+    		margin: auto;
+    		margin-top: 20px;
+    		height: 500px;
+    		margin-left: 180x;
+    	}
+    	input[type = text]
+		{
+
+    		width: 400px;
+    		text-align: center;
+    		border: none;
+    		border-bottom: 1px solid #009999;
+    		font-family: sans-serif;
+    		font-size: 16px;
+    		font-weight: 200px;
+    		padding: 10px 0;
+    		transition: border 0.5s;
+    		outline: none;
+		}
+		::placeholder 
+		{
+    		color:#009999;
+    		opacity: 0.8; 
+		}
+		#sub1
+		{
+    		border: none;
+    		width: 190px;
+    		background: #58D27F;
+    		color:  black;
+    		font-size: 16px;
+    		line-height: 25px;
+    		padding: 10px 0;
+    		border-radius: 15px;
+    		cursor: pointer;
+		}
+		#sub2
+		{
+    		border: none;
+    		width: 190px;
+    		background: #58D27F;
+    		color:  black;
+    		font-size: 16px;
+    		line-height: 25px;
+    		padding: 10px 0;
+    		border-radius: 15px;
+    		cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+<div class="EmpDet">
+	<center>
+	<p><input type="text" id="num" placeholder="Enter number of skills you want to add"></p>	
+	<input type="button" id = "sub1" value="Add" onclick="addinputFields()"><br><br>
+	<div>
+	<br>	
+	<form id="dynamic" action="saveSkills">
+		
+	</form>
+	</div>
+	</center>
+</div>
+</body>
+<script type="text/javascript">
+	function addinputFields()
+	{
+    	var number = document.getElementById("num").value;
+    	var divadd = document.getElementById("dynamic");
+    	while(divadd.firstChild)
+		{
+   			 divadd.removeChild(divadd.firstChild);
+		}
+    	for (i=0;i<number;i++)
+    	{
+			var input = document.createElement("input");
+        	input.type = "text";
+        	input.name = "'"+(i+1)+"'"
+        	input.placeholder ="Add Skill "+(i+1);
+        	divadd.appendChild(input);
+        	divadd.appendChild(document.createElement("br"));
+    	}
+    	divadd.appendChild(document.createElement("br"));
+    	divadd.appendChild(document.createElement("br"));
+    	var save = document.createElement("input");
+    	save.setAttribute("type","submit");
+    	save.setAttribute("value","Save");
+    	save.setAttribute("id","sub2");
+    	divadd.appendChild(save);
+	}
+</script>
+</html>

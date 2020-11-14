@@ -1,0 +1,43 @@
+<div class="container-fluid" id="cardBox">
+    <div class="row">
+        <div *ngFor="let skill of associateSkills;let i = a;let j = b;let k = sd; let l = ed;" class="column">
+            <div class="card">
+                <div class="card-body" id="box">
+                    <h6 class="card-title">{{skill}}</h6>
+                      <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+                            <div class="form-group">
+                              <label for="level">Level</label>
+                                <div class="input-group">
+                                  <ngb-rating id="level" name="level" class="form-control" [(rate)]="i" [max]="3"></ngb-rating>
+                                </div>
+                              <label for="certify">Certification</label>
+                              <div class="input-group">
+                                    <input  id="certify" type="checkbox" name="certify" [(ngModel)]="j">
+                                </div>
+            
+                              <label for="startDate">Start Date</label>
+                              <div class="input-group">
+                                    <input id="startDate" class="form-control" id="dp"
+                                    name="dpn" ngbDatepicker #e="ngbDatepicker" [(ngModel)]="k">
+                             <div class="input-group-append">
+                               <button class="btn btn-outline-secondary calendar glyphicon glyphicon-calendar" (click)="e.toggle()" type="button"></button>
+                             </div>
+                              </div>
+                              <label for="endDate">End Date</label>
+                                      <div class="input-group">
+                                            <input id="endDate" class="form-control" placeholder="yyyy-mm-dd"
+                                            id="dp1" name="dpn1" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="l">
+                                     <div class="input-group-append">
+                                       <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                     </div>
+                                      </div>
+            
+                                      <input type="text" hidden name="assoId" [(ngModel)]="skillmAssoId">
+                                      <input type="text" hidden name="rating" [(ngModel)]="i">
+                                      <input type="submit" class="btn btn-success" value="submit">
+                                    </div>
+                                  </form>
+            </div>
+        </div>
+        </div> 
+    </div>

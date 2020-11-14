@@ -1,0 +1,135 @@
+<!-- 
+<div class="xs-form active-purple-2 mb-3">
+    <input class="form-control" type="search" id="search5" aria-label="Search" mdbInput placeholder="Search for skill">
+    <label for="search5">Search</label>
+</div> -->
+
+<!-- <form>
+        <div class="form-group container-fluid" id="searchBar"  >
+    <input name="searchSkills" class="form-control" name="search" id="search" [(ngModel)]="addedSkills" placeholder="Added skills" [disabled] = "true">
+    </div>
+    </form> -->
+    <div *ngIf="displayWarning" style="justify-content: center; display: flex;"><h5 style="color: red">You need to submit all skills</h5></div>
+    <div class="container-fluid" id="cardBox">
+            <div class="row">
+                <div *ngFor="let skill of arr1;let i = a;let j = b;let k = sd; let l = ed; let m = cw;" class="column">
+                    <div class="card">
+                            <div class="card-header" style="justify-content: center; display: flex;"><h5>{{skill}}</h5></div>
+                        <div class="card-body" id="cardBody">
+                              <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+                                    <div class="form-group">
+                                      <label for="level">Level</label>
+                                        <div class="input-group">
+                                          <ngb-rating id="level" name="level" class="form-control" [(rate)]="i" [max]="3"></ngb-rating>
+                                        </div>
+                                        <div>
+                                      <label for="certify">Certification</label> &nbsp;&nbsp;&nbsp;
+                                      <!-- <div class="input-group"> -->
+                                            <input  id="certify" type="checkbox" name="certify" [(ngModel)]="j">
+                                        <!-- </div> -->
+                                    </div>
+                                      <label for="startDate">Start Date</label>
+                                      <div class="input-group">
+                                            <input id="startDate" class="form-control" id="dp"
+                                            name="dpn" placeholder="yyyy-mm-dd" ngbDatepicker #e="ngbDatepicker" [(ngModel)]="k">
+                                     <div class="input-group-append">
+                                       <button class="btn btn-outline-secondary calendar glyphicon glyphicon-calendar" (click)="e.toggle()" type="button"></button>
+                                     </div>
+                                      </div>
+                                      <div>
+                                            <br>
+                                            <div class="input-group">
+                                                    <label for="startDate">Currently Working ?</label><br>
+                                                    <input name="options"  [(ngModel)]="m" type="radio" [value]="true" [checked]="!m"/> Yes
+
+                                                    <input name="options" [(ngModel)]="m" type="radio" [value]="false" [checked]="m"/> No
+                                                   
+                                              </div>
+                                          </div>
+                                          <div *ngIf="!m">
+                                      <label  for="endDate">End Date</label>
+                                              <div class="input-group">
+                                                    <input id="endDate" class="form-control" placeholder="yyyy-mm-dd"
+                                                    id="dp1" name="dpn1" ngbDatepicker #d="ngbDatepicker" [(ngModel)]="l">
+                                             <div class="input-group-append">
+                                               <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                                             </div>
+                                              </div>
+                                            </div>
+                                              <input type="text" hidden name="skillName" [(ngModel)]="skill">
+                                              <input type="text" hidden name="rating" [(ngModel)]="i">
+                                              <input type="text" hidden name="certification" [(ngModel)]="j">
+                                              <input type="text" hidden name="start" [(ngModel)]="k">
+                                              <input type="text" hidden name="end" [(ngModel)]="l">
+                                              <input type="text" hidden name="cw" [(ngModel)]="m">
+                                              <p *ngIf="dateVal" style="color: red">End date cannot be less than Start date</p>
+                                              <br>
+                                              <div style="justify-content: center; display: flex;">
+                                              <input type="submit" class="btn btn-success formbtn" value="Save Skill">
+                                            </div></div>
+                                          </form>
+                                          <div style="justify-content: center; display: flex;">
+                                          <button (click)="myFunc(skill)" class="btn btn-info formbtn">Cancel Skill</button>
+                                        </div>
+                    </div>
+                </div>
+                </div> 
+            </div>
+
+            <br>
+            <div class="container-fluid row" style="justify-content: center; display: flex;" id="submitSkills">
+                    <button type="button" (click)="done()" class="btn btn-outline-success sub"><b>Done Adding Skills</b></button>
+            </div>
+        
+    <br>
+    
+    <div class="container-fluid" id="frontEnd">
+        <div class="card">
+            <div class="card-header"><b>Front End Skills</b></div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="col-sm-12 col-md-12 col-lg-12">                
+                            <input [(ngModel)]="feSkills" (keyup)="searchFeSkills()" id="searchFE" type="search" class="form-control" placeholder="Search Skills in Front End...">
+                        </div>
+                    </div>
+                    <div id="fe">
+                        <button *ngFor="let skills of frontEnd" class="frontEnd" id={{skills}} (click)="myFunc(skills)"><b>{{skills}}</b></button> 
+                    </div>
+                </div> 
+            </div>
+    </div>
+    <br>
+    <div class="container-fluid" id="backEnd">
+        <div class="card">
+            <div class="card-header"><b>Back End Skills</b></div>
+                <div class="card-body">
+                        <div class="form-group">
+                                <div class="col-sm-12 col-md-12 col-lg-12">                
+                                    <input type="search" class="form-control" [(ngModel)]="beSkills" (keyup)="searchBeSkills()" id="searchBE" placeholder="Search Skills in Back End...">
+                                </div>
+                            </div>
+                    <div id="be">        
+                    <button *ngFor="let skills of backEnd" class="backEnd" id={{skills}} (click)="myFunc(skills)"><b>{{skills}}</b></button> 
+                    </div>
+                </div>
+    </div> 
+    </div>
+    <br>
+    <div class="container-fluid" id="dB">
+            <div class="card">
+                    <div class="card-header"><b>Database Skills</b></div>
+                    <div class="card-body">
+                            <div class="form-group">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">                
+                                        <input type="search" class="form-control" [(ngModel)]="dbSkills" (keyup)="searchDbSkills()" id="searchDB" placeholder="Search Skills in Database...">
+                                    </div>
+                                </div>
+                                <div id="db">
+                            <button *ngFor="let skills of db" class="database" id={{skills}} (click)="myFunc(skills)"><b>{{skills}}</b></button> 
+                    </div> </div>
+        </div>
+    </div> 
+    <br><br>
+    
+    
+    

@@ -1,0 +1,83 @@
+#leftDiv
+{
+    padding-top: 20px;
+    margin-top: 30px;
+    height: 500px;
+    display: inline-block;
+    /* border-left: 1px groove seagreen;
+    border-top: 1px groove seagreen;
+    border-bottom: 1px groove seagreen;
+    border-radius: 1px; */
+    /* margin-left: 10px; */
+    /* border-width: 2px;
+    border-color: blue; */
+}
+img
+{
+    height: 200px;
+    width: 200px;
+}
+#main
+{
+    height: 500px;
+    overflow: hidden;
+}
+
+#pieCh
+{
+    margin-top: 30px;
+    height: 100px;
+}
+#centerDiv
+{
+    padding-top: 20px;
+    margin-top: 30px;
+    display: inline-block;
+    align-content: center;
+    height: 300px;
+    /* border-right: 1px groove seagreen;
+    border-top: 1px groove seagreen;
+    border-bottom: 1px groove seagreen;
+    border-radius: 1px; */
+    /* margin-left: 10px; */
+
+}
+#table1
+{
+    line-height: 55px;
+    font-size: 25px;
+    border:1px;
+}
+#bottomBox{
+    display: inline-block;
+    margin-top: 0;
+}
+
+#rightDiv
+{
+    text-align: center;
+    padding-top: 20px;
+    align-content: center;
+    display: inline-block;
+    height: 400px;
+    /* margin-left: 10px; */
+}
+
+#box
+{
+
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-left: 20px;
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    border-width: 2px;
+    border-style: outset;
+}
+
+.modal-content
+{
+    background-color: #f2f0f0;
+}
+

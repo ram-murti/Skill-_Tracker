@@ -1,0 +1,50 @@
+[{
+		"empId": "1001",
+		"empName": "Chandler Bing",
+		"empImg": "/assets/Chandler.jpg",
+		"empMail": "chandlerb1@in.ibm.com",
+		"empMobile": "7067435567"
+	},
+
+	{
+		"empId": "1004",
+		"empName": "Phoebe Buffay",
+		"empImg": "/assets/Phoebe.jpg",
+		"empMail": "phoebe4@in.ibm.com",
+		"empMobile": "7844356789"
+	},
+
+	{
+		"empId": "1005",
+		"empName": "Rachel Green",
+		"empImg": "/assets/Rachel.jpg",
+		"empMail": "rachel5@in.ibm.com",
+		"empMobile": "8876905434"
+	},
+	{
+		"empId": "1003",
+		"empName": "Monica Geller",
+		"empImg": "/assets/Monica.jpg",
+		"empMail": "monicag3@in.ibm.com",
+		"empMobile": "9456231156"
+	},
+
+
+	{
+		"empId": "1002",
+		"empName": "Joey Tribbiani",
+		"empImg": "/assets/Joey.jpg",
+		"empMail": "joeyt2@in.ibm.com",
+		"empMobile": "9876887654"
+	},
+	
+	
+	
+	{
+		"empId": "1006",
+		"empName": "Ross Geller",
+		"empImg": "/assets/Ross.jpg",
+		"empMail": "rossg6@in.ibm.com",
+		"empMobile": "9844321789"
+	}
+]

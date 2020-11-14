@@ -1,0 +1,19 @@
+<div class="row" id="display">   
+    <div class="displaycards" >
+            <div class="card-columns">
+                <div class="card bg-light cards" *ngFor="let associate of associateSearched">
+                 <!-- <img class="card-img-top image" src="{{associate.associateImage}}" alt="Card image"> -->
+                    <div class="card-body text-center">
+                        <h3 class="card-title">{{associate.associateName}}</h3>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><b>ID: </b> {{associate.associateId}}</li>
+                            <li class="list-group-item"><b>Email: </b> {{associate.associateEmail}}</li>
+                            <li class="list-group-item"><b>Mobile: </b> {{associate.associateMobile}}</li>
+                            <li class="list-group-item"><a href="#" class="btn btn-primary">See Profile</a></li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>    
+</div>    
+      

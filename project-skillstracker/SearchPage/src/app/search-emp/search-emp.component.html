@@ -1,0 +1,126 @@
+<!-- <nav class="navbar navbar-light bg-light" style="justify-content: center; display: flex;">
+          <h3 style="color: peru">SKILLS TRACKER</h3>
+</nav> -->
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="node_modules/chart.js/src/chart.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <div class="view" style="background-image: url('assets/background.jpg'); 
+  background-repeat: no-repeat; background-size: cover; background-position: center ;height: 108vh;width: 100%">
+    <style>
+        .dropdown-menu {
+  display: none;
+  position: absolute;;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-menu a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-menu {display: block;}
+
+.dropdown:hover .btn {background-color: #3e8e41;}
+.dropdown-men {
+  display: none;
+  position: absolute;;
+  background-color: #f1f1f1;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-men a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-menu {display: block;}
+
+    </style>  
+  
+<div class="row" style="justify-content: center;position:fixed;background-color: black;height: 65px;width: 100%;display: flex;">
+    
+
+
+<div class="row" style="justify-content: center; margin-right: 25%;display: flex; " id="searchDestination">    
+    <div class="col-md-8 offset-md-2">
+        <div class="btn-group mr-3" id="outer">
+            
+            <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button class="btn btn-outline-danger" ngbDropdownToggle>{{selectedOption}}</button>
+                <div class="dropdown-menu" ngbDropdownMenu>
+                    <button ngbDropdownItem (click)="selected('Id')">ID</button>
+                    <button ngbDropdownItem (click)="selected('Name')">Name</button>
+                    <button ngbDropdownItem (click)="selected('Mobile')">Mobile</button>
+                    <button ngbDropdownItem (click)="selected('Email')">Email</button>
+                    <button ngbDropdownItem (click)="selected('Skill Name')">Skill Name</button>
+                </div>
+            </div>
+        
+            
+        
+            <div class="md-form active-purple-2 mr-3" style=" display: flex" >
+                <input (keyup)="searchCall()" [(ngModel)] = "typed" name="searchbar" *ngIf="enableSearch" class="form-control" placeholder={{searchPlaceholder}} type="search" id="searchbar" #searchBarFocus aria-label="Search" mdbInput>
+                <input *ngIf="!enableSearch" disabled class="form-control" placeholder={{searchPlaceholder}} type="search" id="searchbar" aria-label="Search" #searchBarFocus mdbInput>
+            </div>
+            <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                    <button class="btn btn-outline-success" (click)=selectedSort() ngbDropdownToggle>{{sortBy}}</button>
+                   
+                    <div class="dropdown-men" ngbDropdownMenu>
+                            <button ngbDropdownItem (click)="selectedsort('Id')">ID</button>
+                            <button ngbDropdownItem (click)="selectedsort('Name')">Name</button>
+                            <button ngbDropdownItem (click)="selectedsort('Mobile')">Mobile</button>
+                            <button ngbDropdownItem (click)="selectedsort('Email')">Email</button>
+                            <button ngbDropdownItem (click)="selectedsort('Skill Name')">Skill Name</button>
+                            <div class="dropdown-menu" ngbDropdownMenu *ngIf="sortOn?.length > 0">
+                                    <button *ngFor="let s of sortOn" (click)="sortOnSkill(s)" ngbDropdownItem>{{s}}</button>
+                                </div>
+                        </div>
+                   
+                </div>
+          
+        </div>
+    </div>
+    
+</div>
+</div>
+<div *ngIf="associateSearched.length == 0" style="justify-content: center; display: flex;">
+    
+</div>
+    <div style=" position: fixed; bottom: 80px; right: 30px;">
+            <button type="button" style="border-radius: 40px;" (click)="logout()" class="btn btn-outline-success">Logout</button>
+        </div>
+    
+    
+
+
+    
+    
+    <div id="destination">
+    <router-outlet></router-outlet> 
+    </div>
+<br><br><br><br><br><br>
+<div class="row" id="display">   
+    <div class="displaycards" >
+            <div class="card-rows">
+                <div class="card bg-light cards" *ngFor="let associate of associateSearched">
+                    <!--<img class="card-img-top img-thumbnail image" src="{{associate.associateImage}}" alt="Card image">-->
+                    <div class="card-body text-left">
+                                    <!--<li class="list-group-item"><b>ID: </b> {{associate.associateId}}</li>-->   
+                                       <button (click)="viewAssociate(associate.associateId)" class="btn btn-primary" ><i class="fas fa-bars"></i></button>
+                        {{associate.associateName}}
+                    </div>
+                </div>
+            </div>
+        </div>    
+</div>  
+</div>
+</html>
+
+

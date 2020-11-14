@@ -1,0 +1,50 @@
+#outer
+{
+    margin: auto;
+    margin-top: 10px;
+}
+
+::placeholder 
+{
+    color: royalblue;
+    opacity: 0.8; 
+    text-align: center;
+}	
+#searchbar
+{
+    width: 500px;
+    height: 50px;
+    margin-left: 10px;
+
+}
+.active-purple input[type=search] {
+    border-bottom: 2px solid royalblue;
+    box-shadow: 0 1px 0 0 royalblue;
+}
+
+.image
+{
+    height: 200px;
+    width: 300px;
+}
+
+.displaycards
+{
+    margin: 40px;
+}
+.cards
+{
+    width: 300px;
+    margin: 20px;
+}
+
+.viewbtn
+{
+    color: white;
+}
+
+#associateModal
+{
+    margin-top: 50px;
+}
+

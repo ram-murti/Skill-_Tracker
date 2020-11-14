@@ -1,0 +1,279 @@
+<!-- <nav class="navbar navbar-light bg-light" style="justify-content: center; display: flex;">
+          <h3 style="color: peru">SKILLS TRACKER</h3>
+</nav> -->
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="node_modules/chart.js/src/chart.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <div class="view" style="background-image: url('assets/background.jpg'); 
+  background-repeat: no-repeat; background-size: cover; background-position: center ;height: 108vh;width: 100%">
+    <style>
+        .dropdown-menu {
+  display: none;
+  position: absolute;;
+  background-color: #f1f1f1;
+  min-width: 200px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-menu a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-menu {display: block;}
+
+.dropdown:hover .btn {background-color: #3e8e41;}
+.dropdown-men {
+  display: none;
+  position: absolute;;
+  background-color: #f1f1f1;
+  min-width: 150px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-men a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-menu {display: block;}
+
+    </style>  
+  
+<div class="row-md-12 row-sm-12 row-lg-12" style="justify-content: center;position:fixed;background-color: black;height: 65px;width: 100%;display: flex;">
+    
+
+
+<div class="row-md-12 row-sm-12 row-lg-12" style="justify-content: center; margin-right: 25%;display: flex; " id="searchDestination">    
+    <div class="col-md-8 offset-md-2">
+        <div class="btn-group mr-3" id="outer">
+            
+            <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                <button class="btn btn-outline-danger" ngbDropdownToggle>{{selectedOption}}</button>
+                <div class="dropdown-menu" ngbDropdownMenu>
+                    <button ngbDropdownItem (click)="selected('Id')">ID</button>
+                    <button ngbDropdownItem (click)="selected('Name')">Name</button>
+                    <button ngbDropdownItem (click)="selected('Mobile')">Mobile</button>
+                    <button ngbDropdownItem (click)="selected('Email')">Email</button>
+                    <button ngbDropdownItem (click)="selected('Skill Name')">Skill Name</button>
+                </div>
+            </div>
+        
+            
+        
+            <div class="md-form active-purple-2 mr-3" style=" display: flex" >
+                <input (keyup)="searchCall()" [(ngModel)] = "typed" name="searchbar" *ngIf="enableSearch" class="form-control" placeholder={{searchPlaceholder}} type="search" id="searchbar" #searchBarFocus aria-label="Search" mdbInput>
+                <input *ngIf="!enableSearch" disabled class="form-control" placeholder={{searchPlaceholder}} type="search" id="searchbar" aria-label="Search" #searchBarFocus mdbInput>
+            </div>
+            <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                    <button class="btn btn-outline-success" (click)=selectedSort() ngbDropdownToggle>{{sortBy}}</button>
+                   
+                    <div class="dropdown-men" ngbDropdownMenu>
+                            <button ngbDropdownItem (click)="selectedsort('Id')">ID</button>
+                            <button ngbDropdownItem (click)="selectedsort('Name')">Name</button>
+                            <button ngbDropdownItem (click)="selectedsort('Mobile')">Mobile</button>
+                            <button ngbDropdownItem (click)="selectedsort('Email')">Email</button>
+                            <button ngbDropdownItem (click)="selectedsort('Skill Name')">Skill Name</button>
+                            <div class="dropdown-menu" ngbDropdownMenu *ngIf="sortOn?.length > 0">
+                                    <button *ngFor="let s of sortOn" (click)="sortOnSkill(s)" ngbDropdownItem>{{s}}</button>
+                                </div>
+                        </div>
+                   
+                </div>
+          
+        </div>
+    </div>
+    
+</div>
+</div>
+<div *ngIf="associateSearched.length == 0" style="justify-content: center; display: flex;">
+    
+</div>
+<div style="position: fixed; bottom: 180px; right: 30px;">
+        <button type="button" style="border-radius: 40px;" (click)="openModal()" class="btn btn-outline-success">+ Add New Associate</button>
+    </div>
+    <div style="position: fixed; bottom: 130px; right: 30px;">
+        <button type="button" style="border-radius: 40px;" (click)="openNewSkills()" class="btn btn-outline-success">+ Add New Skill</button>
+    </div>
+    <div style=" position: fixed; bottom: 80px; right: 30px;">
+            <button type="button" style="border-radius: 40px;" (click)="logout()" class="btn btn-outline-success">Logout</button>
+        </div>
+    
+    
+
+
+    
+    
+    <div id="destination">
+    <router-outlet></router-outlet> 
+    </div>
+<br><br><br><br><br>
+<div class="row" id="display">   
+    <div class="displaycards" >
+            <div class="card-rows">
+                <div class="card bg-light cards" *ngFor="let associate of associateSearched">
+                    <!--<img class="card-img-top img-thumbnail image" src="{{associate.associateImage}}" alt="Card image">-->
+                    <div class="card-body text-left">
+                            
+                                    <!--<li class="list-group-item"><b>ID: </b> {{associate.associateId}}</li>-->   
+                                
+                                       <button (click)="viewAssociate(associate.associateId)" class="btn btn-primary" ><i class="fas fa-bars"></i></button>
+                                    
+                        {{associate.associateName}}
+                       
+                    </div>
+                </div>
+            </div>
+        </div>    
+</div>  
+    
+
+
+
+ <div class="container">
+        <div class="row"  [ngStyle]="{'display':display}">
+            <div class="col-xs-12">
+                <div class="modal" id="associateModal" tabindex="-1" [ngStyle]="{'display':display}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                    <h4 class="modal-title">Add Associate</h4>
+
+                                 <button class="close" data-dismiss="modal" (click)="onClose()">&times;</button>
+                            </div>
+                            <div class="modal-body" style="overflow-y: auto; height: 500px;">
+                                <form name = "form" [formGroup] = "form" #associateForm="ngForm" >
+                                    <div class="form-group">
+                                        <label for="assId">Associate Id </label>
+                                        <input class="form-control" formControlName = "assId" placeholder="Enter Associate Id" type="text"  name="assId"  [(ngModel)]="assId" id="assId" [ngClass] = "{'is-invalid' : form.get('assId').touched && form.get('assId').invalid}" /> 
+                                        <div *ngIf = "form.get('assId').touched && form.get('assId').invalid" class = "invalid-feedback">
+                                                <div class = "popup" *ngIf = "form.get('assId').errors.required">Associate ID is required</div>
+                                                <div class = "popup" *ngIf = "form.get('assId').errors.minlength">Associate Id must contain atleast 6 characters</div>   
+                                        </div>
+                                    </div>
+
+                                <div class="form-group">
+                                            <label for="assId">Associate Name </label>
+                                            <input class="form-control" formControlName = "assName"  placeholder="Enter Associate Name" type="text" name="assName"  [(ngModel)]="assName" id="assName" [ngClass] = "{'is-invalid' : form.get('assName').touched && form.get('assName').invalid}" /> 
+                                            <div *ngIf = "form.get('assName').touched && form.get('assName').invalid" class = "invalid-feedback">
+                                                    <div class = "popup" *ngIf = "form.get('assName').errors.required">Associate Name is required</div>
+                                                    <div class = "popup" *ngIf = "form.get('assName').errors.pattern">Associate Name allows only characters</div>
+ 
+                                                    
+                                            </div>   
+                                        </div>
+
+                                    <div class="form-group">
+                                                <label for="assId">Associate Email </label>
+                                                <input class="form-control" formControlName = "assEmail"  placeholder="Enter Associate Email" type="email" name="assEmail"  [(ngModel)]="assEmail" id="assEmail"  [ngClass] = "{'is-invalid' : form.get('assEmail').touched && form.get('assEmail').invalid}" /> 
+                                                <div *ngIf = "form.get('assEmail').touched && form.get('assEmail').invalid" class = "invalid-feedback">
+                                                        <div class = "popup" *ngIf = "form.get('assEmail').errors.required">Associate email is required</div>
+                                                        <div class = "popup" *ngIf = "form.get('assEmail').errors.email">Associate email must be valid email Address</div>   
+                                                </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                            <label for="assId">Associate Mobile </label>
+                                            <input class="form-control" formControlName = "assMobile" placeholder="Enter Associate Mobile Number" type="number" name="assMobile"  [(ngModel)]="assMobile" id="assMobile" [ngClass] = "{'is-invalid' : form.get('assMobile').touched && form.get('assMobile').invalid}" /> 
+                                            <div *ngIf = "form.get('assMobile').touched && form.get('assMobile').invalid" class = "invalid-feedback">
+                                                    <div class = "popup" *ngIf = "form.get('assMobile').errors.required">Associate Mobile Number  is required</div>
+                                                    <div class="popup" *ngIf = " form.get('assMobile').errors.pattern">Associate mobile must be exactly ten digits</div> 
+                                            </div>
+                                    </div>
+
+                           <!--    <div class="form-group">
+                                            <label for="url1">Associate Image</label><br>
+                                            <label>
+                                                <input type="file" (change)="selectFile($event)">
+                                            </label>
+                                            <button [disabled]="!selectedFiles" (click)="upload()">Upload</button>
+                                    </div>
+                            
+
+                            
+                                    <div class="form-group">
+                                        <button type="button" (click)="togglePhotoPreview()" class="btn btn-primary">
+                                            {{previewPhoto? "Hide" : "Show" }} Preview
+                                        </button>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <!--<img [src]="url1" height="100" width="100" *ngIf="previewPhoto">  
+                                    <img class='photo-img' [hidden]="!showPhoto1" [src]='sanitizer.bypassSecurityTrustUrl(url1)'  height="100" width="100" *ngIf="previewPhoto">
+                                    </div> -->  
+                              
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="saveAssociate()" >Save</button>
+                                        <button class="btn btn-primary" data-dismiss="modal" (click)="onClose()">Close</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                            
+                        </div>
+                    </div>
+      
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+
+     <div class="modal" tabindex="-1" role="dialog"  [ngStyle]="{'display':display1}" >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add skill to Database</h4>
+                <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span aria-hidden="true">&times;</span></button>
+            </div> 
+            <div class="modal-body" style="height: 400px; overflow-y: auto;">  
+                <form>
+                    <div class="form-group">
+                        <label for="noOfInput">Enter number of Skills to be entered</label>
+                            <div class=input-group>
+                                <input id="noOfInput" class="form-control" [(ngModel)]=numOfInput placeholder="Enter number of skills" name="noOfInput">
+                            </div>
+                        <button class="btn btn-primary" (click)="getNum()">Add</button>
+                    </div>
+                </form>     
+   
+                <form #myFormtwo="ngForm" (ngSubmit)="onSubmit(myFormtwo)">
+                    <div class="form-group">
+                        <div class=input-group *ngFor="let a of arr; let i = index">
+                            <label for="skill">Add skill </label>
+                        <div class=input-group>
+                            <input class="form-control" [(ngModel)]="skillName[i]" placeholder="Enter skills" name="skill.{{a}}" id=a> 
+                        </div>
+                    <div class="input-group-append">
+                    <select [(ngModel)]="categoryName[i]" name="category.{{a}}">
+                            <option name="skill"  value="none" selected="selected"> -- Category --
+                            <option name="skill" value="FrontEnd">Front-End
+                            <option name="skill" value="BackEnd">Back-End
+                            <option name="skill" value="Database">Data-Base
+                    </select>
+                    </div>
+                </div>
+                <br>
+                <div>
+                    <input class="btn btn-primary" type="submit" value="Save">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="onCloseHandled()" >Close</button>
+    </div>
+</div> 
+
+</div>
+
+</div>
+</div>
+</html>
+
+

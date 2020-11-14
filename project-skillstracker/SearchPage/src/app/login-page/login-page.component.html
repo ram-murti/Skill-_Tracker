@@ -1,0 +1,389 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="node_modules/chart.js/src/chart.js"></script>
+
+<style>
+.user_card {
+			height: 400px;
+			width: 400px;
+			margin-top: auto;
+			margin-bottom: auto;
+			background: rgba(0, 0, 0, 0.8);
+			position: relative;
+			display: flex;
+			justify-content: center;
+			flex-direction: column;
+			padding: 10px;
+			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			border-radius: 5px;
+
+		}
+		
+        .bg1{
+            background-image: url('assets/loop.gif');
+            background-repeat: no-repeat; 
+            background-size: cover; 
+            background-position: center ;
+            height: 100%;width: 100%;
+        }
+</style>
+ <nav class="navbar navbar-expand-lg  navbar-dark bg-dark " style="position: relative; width: 100%">
+
+    <span class="navbar-brand" >
+    <img src="assets/logo.png" style="width: 100px;">
+    </span>
+    <!-- Links--> 
+         <ul class="navbar-nav ml-auto ">
+                      <li class="nav-item active ">
+                        <a class="nav-link text-danger font-weight-bold" routerLink="/home" >Home</a>
+                      </li>
+        
+                      <li class="nav-item">
+                            <a class="nav-link text-danger font-weight-bold" routerLink="/loginPage" >
+                                SignIn
+                              </a>                     
+                      </li>                        
+                      
+        </ul>
+        </nav>
+<div class="container-fluid row bg1 " style="height: 100vh">
+   
+
+
+            
+
+
+ <div class="container user_card " style="justify-content: center; display: flex; margin-top:10% ; margin-left: 37.3%;margin-right: auto;width: auto;position: relative">
+     
+      
+    <form name="form" [formGroup]="form">
+                    <div class="form-group">
+                        <label style="color:rgb(199, 203, 209)" class="col-form-label col-form-label-lg" for="proId">Email :</label>
+    
+                        <input id="uname" name="userName" formControlName="uname" [(ngModel)]="userEmail" required minlength="4" type="email" class="form-control form-control-lg" [ngClass]="{'is-invalid' : form.get('uname').touched && form.get('uname').invalid}" />
+    
+    
+                        <div *ngIf="form.get('uname').touched && form.get('uname').invalid" class="invalid-feedback">
+                            <p class="alert alert-danger" *ngIf="form.get('uname').errors.required">Email can't be left blank</p>
+                            <p class="alert alert-danger" *ngIf="form.get('uname').errors.pattern">Email Address must be valid</p>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label style="color: rgb(199, 203, 209)" class="col-form-label col-form-label-lg" for="proId">Password :</label>
+    
+                        <input id="upassword" name="userPassword" formControlName="upassword" [(ngModel)]="userPassword" required minlength="8" type="password" class="form-control form-control-lg" [ngClass]="{'is-invalid' : form.get('upassword').touched && form.get('upassword').invalid}"
+                        />
+                        <div *ngIf="form.get('upassword').touched && form.get('upassword').invalid" class="invalid-feedback">
+                            <p class="alert alert-danger" *ngIf="form.get('upassword').errors.required">Password can't be left blank...</p>
+                            <p class="alert alert-danger" *ngIf="form.get('upassword').errors.minlength">Password should be of minimum 8 characters in length</p>
+                        </div>
+                    </div>
+                    <input class="btn btn-success" type="submit" value="Submit" (click)="checkEmail(userEmail, userPassword)">
+    
+                </form>
+                <br>
+                <div>
+                    <button  class="btn btn-link" type="button" (click)="openModal()" style="color: red"><h6>Forgot Password?</h6></button>
+                    <button  class="btn btn-link" type="button" (click)="openReg()"><h5>New User?  Register Here</h5></button>
+                </div>
+              
+               
+            
+        </div>
+    </div>
+  
+			    
+    <!-- forgot password -->
+    <div class="modal " id="forgotModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+        <div class="modal-dialog modal-xl" id="dialog1">
+            <div class="modal-content" id="content1">
+                <div class="modal-header" id="header1">
+                    <h5 class="modal-title">
+                        Forgot Password?
+                    </h5>
+                    <button class="close" data-dismiss="modal" (click)="onClose()">&times;</button>
+                </div><br>
+                <div class="modal-body">
+    
+                    <form name="form1" [formGroup]="form1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" style="color: aliceblue">Email address</label>
+                            <input type="email" class="form-control" [(ngModel)]="verEmail" id="fc1" placeholder="Enter Email Address" formControlName="vername" [ngClass]="{'is-invalid' : form1.get('vername').touched && form1.get('vername').invalid}" />
+                            <div *ngIf="form1.get('vername').touched && form1.get('vername').invalid" class="invalid-feedback">
+                                <div class="alert alert-danger" *ngIf="form1.get('vername').errors.required">*Email is required</div>
+                                <div class="alert alert-danger" *ngIf="form1.get('vername').errors.pattern">*Email must be a valid email address
+                                </div>
+                            </div>
+                            
+                        </div>
+    
+                        <div>
+                            <input type="submit" value="Verify" class="btn btn-success" (click)="verifyEmail(verEmail)">
+                        </div>
+                        <br>
+                        <br>
+                        <br><br><br><br><br><br>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="forgotModal1" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+        <div class="modal-dialog modal-xl" id="dialog2">
+            <div class="modal-content" id="content2">
+                <div class="modal-header" id="header2">
+                    <h5 class="modal-title">
+                        Security Information
+                    </h5>
+                    <button class="close" data-dismiss="modal" (click)="onClose1()">&times;</button>
+                </div><br>
+                <div class="modal-body">
+    
+                    <form name="form2" [formGroup]="form2">
+                        <div class="span12 text-center" style="color: aliceblue">
+                            Question : {{secques}}
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2" style="color: aliceblue">Security Answer</label>
+                            <input type="text" class="form-control" [(ngModel)]="secAnswer" id="fc2" placeholder="Enter Security Answer" formControlName="secanswer" [ngClass]="{'is-invalid' : form2.get('secanswer').touched && form2.get('secanswer').invalid}" />
+                            <div *ngIf="form2.get('secanswer').touched && form2.get('secanswer').invalid" class="invalid-feedback">
+                                <div class="alert alert-danger" *ngIf="form2.get('secanswer').errors.required">*Security Answer is Required</div>
+                                <div class="alert alert-danger" *ngIf="form2.get('secanswer').errors.pattern">*Security Answer must be in valid Format
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div>
+                            <input type="submit" value="Verify" class="btn btn-success" (click)="checkAnswer()"><br><br>
+                            <input type="button" value="Send link to Mail" class="btn btn-success" (click)="sendMail()">
+                        </div>
+                        <br>
+                        <br>
+                        <br><br><br><br><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>		
+    
+    
+    <!-- forgot password 
+    <div class="modal " id="forgotModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+        <div class="modal-dialog modal-xl" id="dialog1">
+            <div class="modal-content" id="content1">
+                <div class="modal-header" id="header1">
+                    <h5 class="modal-title">
+                        Forgot Password?
+                    </h5>
+                    <button class="close" data-dismiss="modal" (click)="onClose()">&times;</button>
+                </div><br>
+                <div class="modal-body">
+    
+                    <form name="form1" [formGroup]="form1">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1" style="color: aliceblue">Email address</label>
+                            <input type="email" class="form-control" [(ngModel)]="verEmail" id="fc1" placeholder="Enter Email Address" formControlName="vername" [ngClass]="{'is-invalid' : form1.get('vername').touched && form1.get('vername').invalid}" />
+                            <div *ngIf="form1.get('vername').touched && form1.get('vername').invalid" class="invalid-feedback">
+                                <div class="alert alert-danger" *ngIf="form1.get('vername').errors.required">*Email is required</div>
+                                <div class="alert alert-danger" *ngIf="form1.get('vername').errors.pattern">*Email must be a valid email address
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div>
+                            <input type="submit" value="Verify" class="btn btn-success" (click)="verifyEmail(verEmail)">
+                        </div>
+                        <br>
+                        <br>
+                        <br><br><br><br><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="modal" id="forgotModal1" tabindex="-1" role="dialog" [ngStyle]="{'display':display1}">
+        <div class="modal-dialog modal-xl" id="dialog2">
+            <div class="modal-content" id="content2">
+                <div class="modal-header" id="header2">
+                    <h5 class="modal-title">
+                        Security Information
+                    </h5>
+                    <button class="close" data-dismiss="modal" (click)="onClose1()">&times;</button>
+                </div><br>
+                <div class="modal-body">
+    
+                    <form name="form2" [formGroup]="form2">
+                        <div class="span12 text-center text-light" >
+                            Question : {{secques}}
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="exampleInputEmail2 "><h4 style="color: aliceblue">Security Answer</h4></label>
+                            <input type="text" class="form-control" [(ngModel)]="secAnswer" id="fc2" placeholder="Enter Security Answer" formControlName="secanswer" [ngClass]="{'is-invalid' : form2.get('secanswer').touched && form2.get('secanswer').invalid}" />
+                            <div *ngIf="form2.get('secanswer').touched && form2.get('secanswer').invalid" class="invalid-feedback">
+                                <div class="alert alert-danger" *ngIf="form2.get('secanswer').errors.required">*Security Answer is Required</div>
+                                <div class="alert alert-danger" *ngIf="form2.get('secanswer').errors.pattern">*Security Answer must be in valid Format
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div>
+                            <input type="submit" value="Verify" class="btn btn-success" (click)="checkAnswer()">
+                        </div>
+                        <br>
+                        <br>
+                        <br><br><br><br><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    
+    
+    
+    
+    <div class="modal" id="forgotModal3" tabindex="-1" [ngStyle]="{'display': display3}">
+        <div class="modal-dialog modal-xl" id="dialog4">
+            <div class="modal-content" id="content4">
+                <div class="modal-header" id="header4">
+                    <h5 class="modal-title">
+                        Set New Password
+                    </h5>
+                    <button class="close" data-dismiss="modal" (click)="onClose3()">&times;</button>
+                </div><br>
+                <div class="modal-body">
+    
+                    <form name="form4" [formGroup]="form4">
+                        <div class="form-group">
+                            <label for="exampleInputEmail4"><h6 style="color: aliceblue">Enter Password</h6></label>
+                            <input type="password" class="form-control" [(ngModel)]="setPass" id="fc7" placeholder="Enter New Password" formControlName="setpass" [ngClass]="{'is-invalid' : form4.get('setpass').touched && form4.get('setpass').invalid}" />
+                            <div *ngIf="form4.get('setpass').touched && form4.get('setpass').invalid" class="invalid-feedback">
+                                <div class="alert alert-danger" *ngIf="form4.get('setpass').errors.required">*New Password is required</div>
+                                <div class="alert alert-danger" *ngIf="form4.get('setpass').errors.minlength">*New Password must be of minimum 8 characters
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="exampleInputEmail5"><h6 style="color: aliceblue">Confirm Your Password</h6></label>
+                            <input type="password" class="form-control" [(ngModel)]="setAgainPass" id="fc8" placeholder="Confirm Your Password" formControlName="setagainpass" [ngClass]="{'is-invalid' : form4.get('setagainpass').touched && form4.get('setagainpass').invalid}" />
+                            <div *ngIf="form4.get('setagainpass').touched && form4.get('setagainpass').invalid" class="invalid-feedback">
+                                <div class="alert alert-danger" *ngIf="form4.get('setagainpass').errors.required">*New Password is required</div>
+                                <div class="alert alert-danger" *ngIf="form4.get('setagainpass').errors.minlength">*New Password must be of minimum 8 characters
+                                </div>
+                            </div>
+                        </div>
+    
+                        <div>
+                            <input type="submit" value="Verify" class="btn btn-success" (click)="setNewPassword()">
+                        </div>
+                        <br>
+                        <br>
+                        <br><br><br><br><br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    <div class="modal" id="forgotModal2" tabindex="-1" [ngStyle]="{'display': display2}">
+        <div class="modal-dialog modal-xl" id="dialog3">
+            <div class="modal-content" id="content3">
+                <div class="modal-header" id="header3">
+                    <h5 class="modal-title">
+                        Sign Up
+                    </h5>
+                    <button class="close" data-dismiss="modal" (click)="onClose2()">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form #myForm="ngForm" (ngSubmit)="onSubmit(myForm)">
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Email Address</label>
+                            <input type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" ngModel class="form-control" id="hrEmail" #hrEmail="ngModel" name="hrEmail" placeholder="Enter your Email" (click)="displayText(hrEmail)"  required/>
+                            <div *ngIf="hrEmail.errors &&(hrEmail.touched || hrEmail.dirty)">   
+                                <div class="alert alert-danger" *ngIf="hrEmail.errors.required">*Email is required</div>
+                                <div class="alert alert-danger" [hidden]="!hrEmail.errors?.pattern">*Email Address must be valid</div>
+                            </div>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Password</label>
+                            <input type="password" class="form-control" ngModel id="hrPassword" name="hrPassword" #hrPassword="ngModel" placeholder="Enter Your Password" minlength="8"  required (click)="displayText(hrPassword)"/>
+                            <div *ngIf="hrPassword.errors &&(hrPassword.touched || hrPassword.dirty)">
+                                <div class="alert alert-danger" *ngIf="hrPassword.errors.required">*Password is required</div>
+                                <div class="alert alert-danger" *ngIf="hrPassword.errors.minlength">*Password must be minimum 8 characters</div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="span12 text-center" style="color: cornflowerblue;">To protect your account, Fill Security Question and Answer from below list.</div>
+                        <hr>
+    
+                        <div class="span12 text-center">
+                                <select class="form-control" ngModel id="quesCategory" name="quesCategory" #quesCategory="ngModel" required (click)="displayText(quesCategory)" aria-placeholder="Choose a question">
+                                        <option id="q1" name="quesCategory"  value="What primary school did you attend ?">What primary school did you attend ?</option>
+                                        <option id="q1" name="quesCategory"  value="In what town or city was your first full time job ?">In what town or city was your first full time job ?</option>
+                                        <option id="q1" name="quesCategory"  value="What are the last five digits of your driver's licence number ?">What are the last five digits of your driver's licence number ?</option> 
+                                </select>
+    
+                                <div *ngIf="quesCategory.errors &&(quesCategory.touched || quesCategory.dirty)">
+                                    <div class="alert alert-danger" *ngIf="quesCategory.errors.required">*Question is required</div>
+                                </div>
+                        </div>
+                        
+                        <br>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label for="exampleInputEmail3">Security Answer</label>
+                                <input type="text" required class="form-control" ngModel id="hrans" name="hrans" #hrans="ngModel" placeholder="Enter Your Answer" (click)="displayText(hrans)"/>
+                                <div *ngIf="hrans.errors &&(hrans.touched || hrans.dirty)">
+                                    <div class="alert alert-danger" *ngIf="hrans.errors.required">*Password is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" value="Register" class="btn btn-success">
+                        </div>
+                        <br><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <div class="modal" id="forgotModal" tabindex="-1" role="dialog" [ngStyle]="{'display':display4}">
+            <div class="modal-dialog modal-xl" id="dialog4">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                              Error  
+                        </h5>
+                        <button class="close" data-dismiss="modal" (click)="onClose4()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                            <p style="color: red">{{errorMessage}}</p>
+                            <button (click)="onClose4()" style="float: right;" class="btn btn-success">Ok</button>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+       
+        </html>
